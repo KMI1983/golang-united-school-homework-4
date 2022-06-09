@@ -26,7 +26,9 @@ func StringSum(input string) (output string, err error) {
 
 	match, _ = regexp.MatchString(`^([\+\-]?[0-9]+[\+\-]{1}[0-9]+)$`, input)
 	if !match {
-		return "", fmt.Errorf("Incorrect input error: %w", errorNotValidValue)
+
+		_, err := strconv.ParseInt(input, 10, 32)
+		return "", fmt.Errorf("Incorrect input error: %w", err)
 	}
 
 	firstOperator := ""
